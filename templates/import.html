@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Brain Tumor Classification Using Deep Learning</title>
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <link href="{{ url_for('static', filename='css/test.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', filename='js/newjs.js') }}" type="text/javascript"></script>
+    <style>
+        #container {
+            max-width: 720px;
+            margin: 0 auto;   
+            background-color: aqua;     
+        }
+        #banner {
+            display: block;
+            margin: 0 auto;
+        }
+        h2 {
+            font-family: Roboto;
+            font-size: 32px;
+            color: rgb(100, 100, 100);
+            text-align: center;
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 40px;
+            font-family: Roboto;
+            font-weight: normal;        
+            color: rgb(100, 100, 100);
+            text-align: center;
+        }
+        a{
+            font-family: Roboto;
+            font-size: 32px;
+            color: rgb(100, 100, 100);
+            text-align: center;
+            font-weight: normal;
+        }
+    </style>
+</head>
+
+<body style="background-color: rgb(149, 242, 242);">
+    <nav class="navbar navbar-light bg-dark" >
+        <div class="container" style="background-color: rgb(178, 181, 181);">
+            <a class="navbar-brand" href="#">Brain Tumor Detection Using Deep Learning</a>
+            <a class="btn btn-primary" href="/admin">Admin</a>
+        </div>
+    </nav>
+    
+    <div id="container">
+        <center>
+            <h1>Brain Tumor Detection</h1>
+            <h2>About Brain Tumor</h2>
+        </center>
+        <p>
+            A brain tumor is an abnormal growth of cells within the brain or its surrounding tissue. There are two main types of brain tumors: primary and secondary.
+        </p>
+        <ol>
+            <li>Primary brain tumors start in the brain and tend to stay there.</li>
+            <li>Secondary brain tumors are more common. These cancers start somewhere else in your body and travel to the brain. 
+                Lung, breast, kidney, colon, and skin cancers are among the most common cancers that spread to your brain.</li>
+        </ol>
+        <p>Some common types of primary brain tumors include:</p>
+        <ol>
+            <li>Glioma Tumor - A glioma tumor is a type of brain tumor that originates from glial cells in the brain or spine.</li>
+            <li>Meningioma Tumor - Meningioma is a type of tumor that grows from the protective membranes, called meninges, which surround the brain and spinal cord. Meningiomas occur most commonly in older women.</li>
+            <li>Pituitary Tumor - A pituitary tumor is an abnormal growth in the pituitary gland that can cause hormonal imbalances and other health problems.</li>  
+        </ol>
+        <img id="banner" src="{{ url_for('static', filename='germ-cell-tumor-second-look-looping.gif') }}" height="320" class="center">
+       
+        <center>
+            <br><h2>Upload MRI Here</h2><br>
+            
+            <form id="upload-file" method="post" enctype="multipart/form-data" >
+                <input type="file" name="file" class="btn btn-secondary" id="imageUpload" accept=".png, .jpg, .jpeg">
+            </form>
+            <div class="image-section" style="display:none;">
+                <img id="imagePreview"  class="img-responsive" src="#" style="width:300px;height:300px;"/><br><br>
+                <div>
+                    <button type="button" class="btn btn-info btn-lg " id="btn-predict">Predict!</button>
+                </div>
+            </div>
+            <div class="loader" style="display:none;"></div>
+            <h3 id="result">
+                <span> </span>
+            </h3>
+        </center><br><br>
+        <center>
+          <table class="table table-bordered" id="doctor-table" style="display: none;">
+              <thead>
+                  <th>Doctor Information</th>
+                  <tr>
+                      <th style="border: 1px solid black;">Doctor Name</th>
+                      <th style="border: 1px solid black;">specialty</th>
+                      <th style="border: 1px solid black;">Address</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for doctor in doctors %}
+                  <tr>
+                      <td style="border: 1px solid black;">{{ doctor.name }}</td>
+                      <td style="border: 1px solid black;">{{ doctor.specialty }}</td>
+                      <td style="border: 1px solid black;">{{ doctor.address }}</td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+      </center>
+
+    </div>
+
+    <script>
+      $(document).ready(function () {
+          $("#btn-predict").click(function () {
+              $("#doctor-table").show();
+          });
+      });
+  </script>
+
+</body>
+
+</html>

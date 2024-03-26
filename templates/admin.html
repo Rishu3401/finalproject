@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+</head>
+<body>
+    <h1>Admin Panel</h1>
+
+    <!-- Form to add a new doctor -->
+    <form action="/add_doctor" method="post">
+        <input type="text" name="name" placeholder="Doctor Name"><br>
+        <input type="text" name="address" placeholder="Address"><br>
+        <button type="submit">Add Doctor</button>
+    </form>
+
+    <!-- List of existing doctors -->
+    <ul>
+        {% for doctor in doctors %}
+        <li>{{ doctor.name }} - {{ doctor.address }}
+            <a href="/update/{{ doctor._id }}">Update</a>
+            <a href="/delete/{{ doctor._id }}">Delete</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
